@@ -28,6 +28,9 @@ repositories {
 
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation("junit:junit:4.13.2")
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.10.2")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     //testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     //implementation(kotlin("stdlib-jdk8"))
 }
@@ -260,3 +263,4 @@ tasks.sonar {
 //kotlin {
 //    jvmToolchain(17)
 //}
+tasks.withType<Test> { useJUnitPlatform() }
