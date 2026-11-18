@@ -42,10 +42,14 @@ class IppAttributesGroupTests {
     fun putWithReplacementDisabled() {
         group.run {
             replaceEnabled = false
-            put(IppAttribute("number", Integer, 0))
-            put(IppAttribute("number", Integer, 1, 2))
-            assertEquals(1, size)
-            assertEquals(get("number")!!.values.size, 1)
+            try {
+                put(IppAttribute("number", Integer, 0))
+                put(IppAttribute("number", Integer, 1, 2))
+                assertEquals(1, size)
+                assertEquals(get("number")!!.values.size, 1)
+            } finally {
+                replaceEnabled = true // static flag: must not leak into other test classes sharing the JVM
+            }
         }
     }
 
